@@ -71,14 +71,14 @@ export default async function Schedule() {
                         const isToday = isSameDay(date, today);
 
                         // Filter posts for this day
-                        const dayPosts = posts.filter(p => p.scheduledFor && isSameDay(new Date(p.scheduledFor), date));
+                        const dayPosts = posts.filter((p: { scheduledFor: Date | null }) => p.scheduledFor && isSameDay(new Date(p.scheduledFor), date));
 
                         return (
                             <div key={i} className={`bg-slate-900/40 p-2 min-h-[100px] border-b border-r border-slate-700/20 hover:bg-slate-800/30 transition-colors group relative ${isOtherMonth ? 'opacity-30' : ''}`}>
                                 <span className={`text-sm ${isToday ? 'text-indigo-400 font-bold bg-indigo-500/20 px-2 py-0.5 rounded-full' : 'text-slate-500'}`}>{dayNum}</span>
 
                                 <div className="mt-2 flex flex-col gap-1">
-                                    {dayPosts.map((post) => (
+                                    {dayPosts.map((post: { id: string; platform: string; title: string | null; content: string; scheduledFor: Date | null }) => (
                                         <div key={post.id} className={`text-xs p-1.5 rounded-md ${getPlatformColor(post.platform)} text-white shadow-sm truncate cursor-pointer hover:opacity-90`} title={post.title || post.content}>
                                             {post.scheduledFor ? format(new Date(post.scheduledFor), 'HH:mm') : ''} - {post.title}
                                         </div>

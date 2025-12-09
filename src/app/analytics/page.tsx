@@ -30,7 +30,7 @@ export default async function Analytics() {
                     </div>
 
                     <div className="h-64 flex items-end gap-2 px-2 pb-2 border-b border-slate-700/50">
-                        {growth.map((g, i) => (
+                        {growth.map((g: { id: string; date: Date; value: number }, i: number) => (
                             <div key={g.id} className="flex-1 bg-indigo-500/30 hover:bg-indigo-500/60 rounded-t-sm transition-all relative group" style={{ height: `${g.value}%` }}>
                                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity border border-slate-700 whitespace-nowrap z-10">
                                     {new Date(g.date).toLocaleDateString()}: +{g.value}
@@ -53,7 +53,7 @@ export default async function Analytics() {
                     </div>
 
                     <div className="flex flex-col gap-4">
-                        {demographics.map((item, i) => (
+                        {demographics.map((item: { id: string; country: string; percentage: number }, i: number) => (
                             <div key={item.id} className="flex items-center gap-4">
                                 <span className="w-6 text-sm text-slate-400">{i + 1}</span>
                                 <div className="flex-1">

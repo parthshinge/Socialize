@@ -37,7 +37,7 @@ export default async function Home() {
   };
 
   // Calculate max value for chart scaling
-  const maxVal = Math.max(...growth.map(g => g.value), 100);
+  const maxVal = Math.max(...growth.map((g: { value: number }) => g.value), 100);
 
   return (
     <div className="flex flex-col gap-8">
@@ -54,7 +54,7 @@ export default async function Home() {
 
       {/* Stats Grid */}
       <div className="grid-cols-4">
-        {stats.length > 0 ? stats.map((stat) => (
+        {stats.length > 0 ? stats.map((stat: { id: string; title: string; value: string; trend: string; trendUp: boolean; type: string }) => (
           <StatCard
             key={stat.id}
             title={stat.title}
@@ -81,7 +81,7 @@ export default async function Home() {
 
           {/* Chart Area */}
           <div className="w-full h-64 flex items-end justify-between px-4 gap-2">
-            {growth.map((g, i) => {
+            {growth.map((g: { id: string; date: Date; value: number }, i: number) => {
               const heightPct = (g.value / maxVal) * 100;
               return (
                 <div key={g.id} className="flex flex-col items-center gap-2 group w-full" title={`Date: ${new Date(g.date).toLocaleDateString()}, Value: ${g.value}`}>
