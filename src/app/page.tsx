@@ -69,7 +69,7 @@ export default async function Home() {
         )}
       </div>
 
-      <div className="grid-cols-3" style={{ gridTemplateColumns: '2fr 1fr' }}>
+      <div className="dashboard-grid">
         {/* Main Content Area */}
         <div className="glass-panel card p-6 animate-fade-in" style={{ minHeight: '400px' }}>
           <div className="flex justify-between items-center mb-6">

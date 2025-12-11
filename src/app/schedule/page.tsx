@@ -58,39 +58,43 @@ export default async function Schedule() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-7 gap-px bg-slate-700/50 rounded-lg overflow-hidden flex-1 border border-slate-700/50">
-                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                        <div key={day} className="bg-slate-900/80 p-4 text-center text-sm font-semibold text-slate-400 border-b border-slate-700/50">
-                            {day}
-                        </div>
-                    ))}
-
-                    {calendarDays.map((date, i) => {
-                        const dayNum = format(date, 'd');
-                        const isOtherMonth = !isSameMonth(date, monthStart);
-                        const isToday = isSameDay(date, today);
-
-                        // Filter posts for this day
-                        const dayPosts = posts.filter((p: { scheduledFor: Date | null }) => p.scheduledFor && isSameDay(new Date(p.scheduledFor), date));
-
-                        return (
-                            <div key={i} className={`bg-slate-900/40 p-2 min-h-[100px] border-b border-r border-slate-700/20 hover:bg-slate-800/30 transition-colors group relative ${isOtherMonth ? 'opacity-30' : ''}`}>
-                                <span className={`text-sm ${isToday ? 'text-indigo-400 font-bold bg-indigo-500/20 px-2 py-0.5 rounded-full' : 'text-slate-500'}`}>{dayNum}</span>
-
-                                <div className="mt-2 flex flex-col gap-1">
-                                    {dayPosts.map((post: { id: string; platform: string; title: string | null; content: string; scheduledFor: Date | null }) => (
-                                        <div key={post.id} className={`text-xs p-1.5 rounded-md ${getPlatformColor(post.platform)} text-white shadow-sm truncate cursor-pointer hover:opacity-90`} title={post.title || post.content}>
-                                            {post.scheduledFor ? format(new Date(post.scheduledFor), 'HH:mm') : ''} - {post.title}
-                                        </div>
-                                    ))}
+                <div className="flex-1 w-full rounded-lg border border-slate-700/50 overflow-hidden flex flex-col">
+                    <div className="flex-1 w-full overflow-x-auto">
+                        <div className="grid grid-cols-7 gap-px bg-slate-700/50 min-h-full" style={{ minWidth: '800px' }}>
+                            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                                <div key={day} className="bg-slate-900/80 p-4 text-center text-sm font-semibold text-slate-400 border-b border-slate-700/50">
+                                    {day}
                                 </div>
+                            ))}
 
-                                <button className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 text-slate-500 hover:text-white">
-                                    <MoreHorizontal size={14} />
-                                </button>
-                            </div>
-                        );
-                    })}
+                            {calendarDays.map((date, i) => {
+                                const dayNum = format(date, 'd');
+                                const isOtherMonth = !isSameMonth(date, monthStart);
+                                const isToday = isSameDay(date, today);
+
+                                // Filter posts for this day
+                                const dayPosts = posts.filter((p: { scheduledFor: Date | null }) => p.scheduledFor && isSameDay(new Date(p.scheduledFor), date));
+
+                                return (
+                                    <div key={i} className={`bg-slate-900/40 p-2 min-h-[100px] border-b border-r border-slate-700/20 hover:bg-slate-800/30 transition-colors group relative ${isOtherMonth ? 'opacity-30' : ''}`}>
+                                        <span className={`text-sm ${isToday ? 'text-indigo-400 font-bold bg-indigo-500/20 px-2 py-0.5 rounded-full' : 'text-slate-500'}`}>{dayNum}</span>
+
+                                        <div className="mt-2 flex flex-col gap-1">
+                                            {dayPosts.map((post: { id: string; platform: string; title: string | null; content: string; scheduledFor: Date | null }) => (
+                                                <div key={post.id} className={`text-xs p-1.5 rounded-md ${getPlatformColor(post.platform)} text-white shadow-sm truncate cursor-pointer hover:opacity-90`} title={post.title || post.content}>
+                                                    {post.scheduledFor ? format(new Date(post.scheduledFor), 'HH:mm') : ''} - {post.title}
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <button className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 text-slate-500 hover:text-white">
+                                            <MoreHorizontal size={14} />
+                                        </button>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
