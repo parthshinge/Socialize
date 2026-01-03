@@ -89,7 +89,7 @@ export default async function Home() {
                     className="w-full bg-indigo-500/20 rounded-t-sm relative group-hover:bg-indigo-500/40 transition-all duration-300"
                     style={{ height: `${heightPct}%` }}
                   >
-                    <div className="absolute top-0 w-full h-1 bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+                    <div className="absolute top-0 w-full h-1 bg-indigo-500 shadow-indigo-glow"></div>
                   </div>
                 </div>
               );
